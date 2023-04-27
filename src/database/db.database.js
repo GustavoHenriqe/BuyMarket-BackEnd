@@ -11,4 +11,6 @@ try {
     console.log(error)
 }
 
-export default mongoClient
+export const db = mongoClient.db()
+
+export default db

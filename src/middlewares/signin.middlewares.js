@@ -23,7 +23,7 @@ export async function verificationEmailAndPasswordInDB(req, res, next) {
             return res.status(404).send({ message: "Não conseguimos encontrar o email" })
         }
 
-        const verificationPassword = bcrypt.compare(password, searchUser.password)
+        const verificationPassword = bcrypt.compareSync(password, searchUser.password)
 
         if (verificationPassword === false) {
             return res.status(401).send({ message: "Senha inválida" })

@@ -10,7 +10,6 @@ export async function signin(req, res) {
 
     try {
         const searchUser = res.locals.user
-
         
         const data = { id: new ObjectId(searchUser._id) }
         const key = process.env.KEY_JWT
@@ -32,13 +31,11 @@ export async function signup(req, res) {
     try {
         const encryptPassword = bcrypt.hashSync(password, 10)
 
-        await db.collection("users").insertOne({ password: encryptPassword, email: email, name: name })
+        await db.collection("users").insertOne({ password: encryptPassword, email: email, name: name, balance: 0 })
 
         res.status(201).send({message: "Cadastro criado com sucesso"})
 
     } catch (err) {
         res.status(500).send("Erro interno do servidor!!")
     }
-
-
 }

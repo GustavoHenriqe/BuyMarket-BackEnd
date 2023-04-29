@@ -1,18 +1,6 @@
 import bcrypt from "bcrypt"
 import { db } from "../database/db.database.js"
 
-export function verificationSchema(schema) {
-    return (req, res, next) => {
-        const validate = schema.validate(req.body, { abortEarly: false })
-
-        if (validate.error) {
-            const errors = validate.error.details.map(detail => detail.message)
-            return res.status(422).send({ message: "Não foi possivel processar a requisição!!", errors: errors })
-        }
-        next()
-    }
-}
-
 export function verificationEmail(required) {
     return async (req, res, next) => {
         const { email } = req.body

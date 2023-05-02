@@ -1,9 +1,10 @@
-import jwt from "jsonwebtoken"
-import dotenv from "dotenv"
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+import buyProductSchema from "../schemas/buyProducts.schemas";
 
-dotenv.config()
+dotenv.config();
 
-export function verificationToken(req, res, next) {
+export function validationToken(req, res, next) {
     const { token } = req.headers
 
     try {

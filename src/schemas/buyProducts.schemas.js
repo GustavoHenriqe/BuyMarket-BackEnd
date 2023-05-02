@@ -8,6 +8,7 @@ export default function buyProductSchema () {
         cardNumber: joi.number().min(16).max(16),
         type: joi.string(),
         expiration: joi.number().min(4).max(4),
-        cvc: joi.number().min(3).max(3)
+        cvc: joi.number().min(3).max(3),
+        products: { }
     })
 };

@@ -20,3 +20,17 @@ export async function insertProduct(req, res) {
         res.status(500).send("Erro interno do servidor!!")
     }
 }
+
+export async function getProducts(req, res) {
+
+    const data = res.locals.data
+    console.log(data.id)
+    try {
+        const products = await db.collection("products").find({ idUser: { $ne: new ObjectId(data.id)}}).toArray()
+
+        res.status(200).send(products)
+    } catch (err) {
+        res.status(500).send("Erro interno do servidor!!")
+        console.log(err)
+    }
+}

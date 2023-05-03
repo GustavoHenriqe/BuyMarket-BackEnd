@@ -5,3 +5,5 @@ const sellProductSchema = joi.object({
     value: joi.string(),
     image: joi.url()
 });
+
+export default sellProductSchema;

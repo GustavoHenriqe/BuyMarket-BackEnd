@@ -1,7 +1,6 @@
 import { Router } from "express"
 import { procutSchema, tokenSchema } from "../schemas/product.schema.js"
 import { verificationSchema } from "../middlewares/verificationSchema.middlewares.js"
-import { verificationSchema } from "../middlewares/verificationSchema.middlewares.js"
 import { getProducts, insertProduct } from "../controllers/products.controllers.js"
 
 const productsRouter = Router()

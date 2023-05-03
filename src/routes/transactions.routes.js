@@ -1,11 +1,10 @@
 import { Router } from "express";
-import { validationToken } from "../middlewares/transaction.middlewares";
-import { verificationSchema } from "../middlewares/verificationSchema.middlewares";
-import buyProductSchema from "../schemas/buyProducts.schemas";
-import { tokenSchema } from "../schemas/product.schema";
-import { buyProducts } from "../controllers/transactions.controller";
-
-
+import { validationToken } from "../middlewares/global.middlewares.js";
+import { verificationSchema } from "../middlewares/verificationSchema.middlewares.js";
+import { buyProductSchema } from "../schemas/buyProducts.schemas.js";
+import { tokenSchema } from "../schemas/product.schema.js";
+import { buyProducts } from "../controllers/transactions.controller.js";
+import { searchProducts } from "../middlewares/transaction.middlewares.js";
 
 const transactionRouter = Router();
 
@@ -13,5 +12,6 @@ transactionRouter.post("/transactions",
     validationToken,
     verificationSchema(tokenSchema, "headers"),
     verificationSchema(buyProductSchema, "body"),
+    searchProducts,
     buyProducts
 );

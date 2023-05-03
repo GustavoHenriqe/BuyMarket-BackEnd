@@ -1,7 +1,7 @@
 import { Router } from "express"
 import { procutSchema, tokenSchema } from "../schemas/product.schema.js"
 import { verificationSchema } from "../middlewares/verificationSchema.middlewares.js"
-import { verificationToken } from "../middlewares/products.middlewares.js"
+import { verificationSchema } from "../middlewares/verificationSchema.middlewares.js"
 import { getProducts, insertProduct } from "../controllers/products.controllers.js"
 
 const productsRouter = Router()
@@ -9,13 +9,13 @@ const productsRouter = Router()
 productsRouter.post("/products", 
     verificationSchema(procutSchema, "body"), 
     verificationSchema(tokenSchema, "headers"),
-    verificationToken,
+    verificationSchema,
     insertProduct
 )
 
 productsRouter.get("/products", 
     verificationSchema(tokenSchema, "headers"),
-    verificationToken,
+    verificationSchema,
     getProducts
 )
 

@@ -1,23 +1,22 @@
-import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
-import buyProductSchema from "../schemas/buyProducts.schemas";
+import { db } from "../database/db.database.js"
+import { ObjectId } from "mongodb"
 
-dotenv.config();
+export async function searchProducts (req, res, next) {
+    const { products } = req.body
 
-export function validationToken(req, res, next) {
-    const { token } = req.headers
+    const convertAllObjcetId = products.map(id => new ObjectId(id))
 
     try {
-        const removedBearer = token.replace("Bearer ", "")
+        const arrayOfProducts = await db.collection("products").find({ _id: { $in: convertAllObjcetId }}).toArray()
 
-        const key = process.env.KEY_JWT
+        if ( products.length !== arrayOfProducts.length ) {
+            return res.status(404).send({ message: "Algum produto que você queira comprar não existe" })
+        }
 
-        const data = jwt.verify(removedBearer, key)
-
-        res.locals.data = data
+        res.locals.arrayProducts = convertAllObjcetId
 
         next()
     } catch (err) {
-        res.status(401).send({message: "Login experirado"})
+        res.status(500).send("Erro interno do servidor!!")
     }
-};
+}

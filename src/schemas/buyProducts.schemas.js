@@ -1,6 +1,6 @@
 import joi from "joi";
 
-export default function buyProductSchema () { 
+export const buyProductSchema = 
     joi.object({
         cep: joi.number().min(8).max(8),
         household: joi.string(),
@@ -10,5 +10,4 @@ export default function buyProductSchema () {
         expiration: joi.number().min(4).max(4),
         cvc: joi.number().min(3).max(3),
         products: { }
-    })
-};
+    });
